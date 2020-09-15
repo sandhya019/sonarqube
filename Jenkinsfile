@@ -78,10 +78,12 @@ pipeline {
 		
 	stage('SonarQube Analysis') {
 		steps{
+		   script {	
 		 def Maven3 = tool name: 'Maven3', type: 'maven'
 		  withSonarQubeEnv("Sonar_server") {
 		   sh "${Maven3}/bin/mvn sonar:sonar"
-		   }
+		      }
+		   }	   
 		}	
   	 }
   }	    
