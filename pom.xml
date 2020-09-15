@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.lla</groupId>
+	<artifactId>customer-management-biz</artifactId>
+    <version>1.0.40-SNAPSHOT</version>
+    <packaging>mule-application</packaging>
+
+	<name>customer-management-biz</name>
+
+    <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    	<app.runtime>4.2.2</app.runtime>
+		<mule.maven.plugin.version>3.3.5</mule.maven.plugin.version>
+        <munit.version>2.2.5</munit.version>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.mule.tools.maven</groupId>
+				<artifactId>mule-maven-plugin</artifactId>
+				<version>${mule.maven.plugin.version}</version>
+				<extensions>true</extensions>
+				<configuration>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jfrog.buildinfo</groupId>
+				<artifactId>artifactory-maven-plugin</artifactId>
+				<version>2.7.0</version>
+				<inherited>false</inherited>
+				<executions>
+			<execution>
+				<id>build-info</id>
+				<goals>
+				<goal>publish</goal>
+				</goals>
+				<configuration>
+				<publisher>
+				<contextUrl>http://3.137.145.165:8081/artifactory</contextUrl>
+				<username>admin</username>
+				<!--<password>admin123</password>-->
+				<password>AKCp5fUsRZTQNuzPaSZftkD9Npv9FaShA6mG8Mm7DcS8ecMJDwscXp8rdHErn4emQJcMW4Dwa</password> 
+				<repoKey>lla-esb-release</repoKey>
+				<snapshotRepoKey>lla-esb-snapshot</snapshotRepoKey>
+				</publisher>
+				</configuration>
+				</execution>
+				</executions>
+			</plugin>
+            <plugin>
+                <groupId>com.mulesoft.munit.tools</groupId>
+                <artifactId>munit-maven-plugin</artifactId>
+                <version>${munit.version}</version>
+                <executions>
+                    <execution>
+                        <id>test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>test</goal>
+                            <goal>coverage-report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <coverage>
+                        <runCoverage>true</runCoverage>
+                        <failBuild>true</failBuild>
+                        <requiredApplicationCoverage>75</requiredApplicationCoverage>
+                        <formats>
+                            <format>console</format>
+                            <format>html</format>
+                        </formats>
+                    </coverage>
+		<dynamicPorts> <dynamicPort>a.dynamic.port</dynamicPort> </dynamicPorts>
+		</configuration>
+            </plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+        <dependency>
+            <groupId>org.mule.connectors</groupId>
+            <artifactId>mule-http-connector</artifactId>
+            <version>1.5.11</version>
+            <classifier>mule-plugin</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.connectors</groupId>
+            <artifactId>mule-sockets-connector</artifactId>
+            <version>1.1.5</version>
+            <classifier>mule-plugin</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.mulesoft.munit</groupId>
+            <artifactId>munit-runner</artifactId>
+            <version>2.2.3</version>
+            <classifier>mule-plugin</classifier>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.mulesoft.munit</groupId>
+            <artifactId>munit-tools</artifactId>
+            <version>2.2.3</version>
+            <classifier>mule-plugin</classifier>
+            <scope>test</scope>
+        </dependency>
+	</dependencies>
+
+	<repositories>
+          <repository>
+            <id>anypoint-exchange-v2</id>
+            <name>Anypoint Exchange</name>
+            <url>https://maven.anypoint.mulesoft.com/api/v2/maven</url>
+            <layout>default</layout>
+        </repository>
+        <repository>
+            <id>mulesoft-releases</id>
+            <name>MuleSoft Releases Repository</name>
+            <url>https://repository.mulesoft.org/releases/</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>mulesoft-releases</id>
+            <name>mulesoft release repository</name>
+            <layout>default</layout>
+            <url>https://repository.mulesoft.org/releases/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+	    <pluginRepository>
+	<id>Maven-Artifactory-Plugin</id>
+	<url>https://jcenter.bintray.com</url>
+	</pluginRepository>
+    </pluginRepositories>
+</project>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+	xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<munit:dynamic-port propertyName="a.dynamic.port" min="6000" max="7000"/>
+	<munit:config name="sample-test-suite.xml" />
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="88c36db8-ea69-4f3c-9941-15055dcfd6bf" >
+		<http:request-connection host="localhost" port="${a.dynamic.port}" />
+	</http:request-config>
+	<munit:test name="sample-test-suite-200StatusCode" doc:id="7d5913be-f3db-43c2-b8ae-3299761ae1a4" description="Test" ignore="true">
+		<munit:execution >
+			<http:request method="GET" doc:name="Request" doc:id="fb0440d5-6dd8-4ef7-89cb-148385a425d7" config-ref="HTTP_Request_configuration" path="/api/sample"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert That Status Code is 200" doc:id="a00b39fe-f695-47f1-b160-9d70bdab6dab" is="#[MunitTools::equalTo(200)]" expression="#[attributes.statusCode]" message="The HTTP Status code is not correct!"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="sample-test-suite-404StatusCode" doc:id="6311f2e6-93bd-43a2-8a40-e7052d3489a3" description="Test" ignore="true">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to sampleFlow" doc:id="e51fc9e5-13c7-41cb-bd3f-cf0ba2666403" name="sampleFlow" targetValue="Failure"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert That Status Code is 404" doc:id="5861cd3d-f8a5-40a9-8a68-8b8c48f22d4a" is="#[MunitTools::equalTo(404)]" expression="#[attributes.statusCode]" message="The HTTP Status code is not correct!"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="sample-test-suite-SuccessResponse" doc:id="4cc5b5e9-cc54-4a1a-8342-774f3ece5201" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to sampleFlow" doc:id="e95a103d-d1f2-43ac-bbfa-2080c162a08a" name="sampleFlow"/>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-that doc:name="Assert that" doc:id="0228ac7c-e06e-4d3e-a208-d2f8bc1ecfa6" is="#[MunitTools::withMediaType('application/json')]" expression="#[payload]" message="Payload is not json"/>
+		
+</munit:validation>
+	
+</munit:test>
+<munit:test name="sample-test-suite-NotNullResponse" doc:id="36ed9631-17ce-4b57-a8ed-9f350d493355" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to sampleFlow" doc:id="858b1460-0a7c-48ae-91ae-ee6d1c3c92bb" name="sampleFlow"/>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-that doc:name="Assert that" doc:id="5447b531-8a92-412f-b6c4-2d95d3399b2a" is="#[MunitTools::notNullValue()]" expression="#[payload]" message="Payload is not null"/>
+		
+</munit:validation>
+	
+</munit:test>
+
+
+</mule>

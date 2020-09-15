@@ -1,0 +1,117 @@
+{
+	"info": {
+		"_postman_id": "ef910bc5-98eb-4c18-80ce-b2be72a0d45a",
+		"name": "LLA Integration Test Report",
+		"description": "Postman Integration Test Cases",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "StatusCode",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "71aced2d-640c-4214-9d7c-b31d8bd07dfe",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://34.240.26.55:8089/api/sample",
+					"protocol": "http",
+					"host": [
+						"34",
+						"240",
+						"26",
+						"55"
+					],
+					"port": "8089",
+					"path": [
+						"api",
+						"sample"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ResponseTime",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "8f929eeb-2b99-4c79-9631-d0f8698f9d1a",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "a6dc22f1-0089-4fb4-9113-762f646bc93a",
+						"exec": [
+							"pm.test(\"response time is below 1000ms\", function () {\r",
+							"   pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://34.240.26.55:8089/api/sample",
+					"protocol": "http",
+					"host": [
+						"34",
+						"240",
+						"26",
+						"55"
+					],
+					"port": "8089",
+					"path": [
+						"api",
+						"sample"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "7d1d2889-93af-4954-8ea1-25f2081feede",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "35a09d8d-401f-4182-8ac7-cde8a23ef236",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

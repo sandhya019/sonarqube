@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="c28cfc49-e09a-4076-a441-2fb176d3a21b" >
+		<http:listener-connection host="0.0.0.0" port="8088"/>
+	</http:listener-config>
+	<configuration-properties doc:name="Configuration properties" doc:id="3714216d-b53f-4387-8b24-294fd0f73d0a" file="code.properties" />
+	<flow name="sampleFlow" doc:id="ee51714f-78ac-4eb2-bee2-04d95a353d50" >
+		<http:listener doc:name="Listener" doc:id="98c26ab7-f5a6-4513-96ea-3ce1421f199f" config-ref="HTTP_Listener_config" path="/api/sample"/>
+		<ee:transform doc:name="Transform Message" doc:id="5c28fdd7-0d92-4de6-8f8b-53277cc790ab" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"data" : "Hello "++ p('region')
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
+

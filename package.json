@@ -1,0 +1,15 @@
+{
+  "name": "postman-newman-jenkins",
+  "version": "1.0.0",
+  "description": "My Test Project",
+  "directories": {
+    "tests": "tests"
+  },
+  "scripts": {
+    "newman-tests": "newman run --disable-unicode integration_tests/collection.json --reporters cli,junit,html --reporter-junit-export newman.xml --reporter-html-export report/${BUILD_NUMBER}/htmlreport.html --insecure"
+  },
+  "author": "Test Author",
+  "dependencies": {
+    "newman": "^5.1.2"
+  }
+}
