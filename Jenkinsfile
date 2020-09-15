@@ -82,7 +82,9 @@ pipeline {
 		            def scannerHome = tool name: 'Sonarqube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
 			    withSonarQubeEnv ('Sonar_server') {
 				  sh ''' 
-				     ${scannerHome}/bin/sonar-scanner -D sonar.login = admin -D sonar.password = admin 
+				     ${scannerHome}/bin/sonar-scanner \
+				      -Dsonar.host.url = http://18.218.4.100:9000 \
+          			      -Dsonar.login = d01317f1153b51c579d90463e58864d6cc2c9286
 					'''
 					}
 				}
@@ -90,7 +92,7 @@ pipeline {
 		}
          }
  
-			   
+			     //-D sonar.login = admin -D sonar.password = admin 
 	          //def Maven3 = tool name: 'Maven3', type: 'maven'
 		 //withSonarQubeEnv('Sonar_server') {      		   
 		  // sh '''
