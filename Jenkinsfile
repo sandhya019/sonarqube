@@ -88,7 +88,7 @@ pipeline {
 				}
 			}
 		}
-    }
+         }
  
 			   
 	          //def Maven3 = tool name: 'Maven3', type: 'maven'
@@ -143,7 +143,5 @@ post {
             
         }
     }
-
-
 }
 
