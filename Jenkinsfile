@@ -82,7 +82,7 @@ pipeline {
 		            def scannerHome = tool name: 'Sonarqube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
 			    withSonarQubeEnv ('Sonar_server') {
 				  sh ''' 
-				     ${scannerHome}/bin/sonar:sonar -D sonar.login = admin -D sonar.password = admin 
+				     ${scannerHome}/bin/sonar-scanner -D sonar.login = admin -D sonar.password = admin 
 					'''
 					}
 				}
