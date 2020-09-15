@@ -79,10 +79,10 @@ pipeline {
 	stage('SonarQube Analysis') {
 		steps{
 		   script {	
-	         def mavenPom = readMavenPom file:'pom.xml'
+	          def Maven3 = tool name: 'Maven3', type: 'maven'
 		  withSonarQubeEnv("Sonar_server") {
-		  mvn sonar:sonar \
-		  -Dsonar.host.url=http://3.137.158.167:9000 \
+		   sh "${Maven3}/bin/mvn sonar:sonar"
+		   mvn sonar:sonar \
 		  -Dsonar.login=568b79c704124d4f2288efca690cc07bfc5b962d
 		      }
 		   }	   
