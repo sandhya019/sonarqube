@@ -78,22 +78,37 @@ pipeline {
 		
 	stage('SonarQube Analysis') {
 		steps{
-		   script{	
-	          def Maven3 = tool name: 'Maven3', type: 'maven'
-		 withSonarQubeEnv('Sonar_server') {
-       		   //mvn ‘${SONAR_MAVEN_GOAL} -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_AUTH_TOKEN} ‘
+		      script{	
+		            def scannerHome = tool 'Sonarqube';
+			    withSonarQubeEnv ('Statsh-Server') {
+				  sh ''' 
+				    $(scannerHome)/bin/sonar-runner -D sonar.login = admin -D sonar.password = admin 
+					'''
+					}
+				}
+			}
+		}
+    }
+ 
+			   
+	          //def Maven3 = tool name: 'Maven3', type: 'maven'
+		 //withSonarQubeEnv('Sonar_server') {      		   
+		  // sh '''
+		  //    ${Maven3}/bin/mvn sonar:sonar  
+		  //   '''
+			 
+			 //mvn ‘${SONAR_MAVEN_GOAL} -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_AUTH_TOKEN} ‘
     	   
 		 // withSonarQubeEnv("Sonar_server") {
 	          // sh 'mvn clean package sonar:sonar'
-		   sh "${Maven3}/bin/mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=admin" 
 			//sh '''
 			//mvn clean sonar:sonar -Dsonar.url="http://3.137.158.167:9000" -Dsonar.login=admin -Dsonar.password=admin  
 			//'''
-		    }
-		   }	   
-		}	
-  	 }
-  }	    
+		  }
+		  	   
+			
+  	 
+  	    
 		
 
         //stage('Artifactory-Publish'){
