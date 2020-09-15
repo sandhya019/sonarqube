@@ -81,7 +81,8 @@ pipeline {
 		   script {	
 	          def Maven3 = tool name: 'Maven3', type: 'maven'
 		  withSonarQubeEnv("Sonar_server") {
-		   sh "${Maven3}/bin/mvn sonar:sonar" 
+	           sh 'mvn clean package sonar:sonar'
+		  // sh "${Maven3}/bin/mvn sonar:sonar" 
 		      }
 		   }	   
 		}	
