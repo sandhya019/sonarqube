@@ -80,7 +80,7 @@ pipeline {
 		steps{
 		      script{	
 		            def scannerHome = tool 'Sonarqube';
-			    withSonarQubeEnv ('Statsh-Server') {
+			    withSonarQubeEnv ('Sonar_server') {
 				  sh ''' 
 				    $(scannerHome)/bin/sonar-runner -D sonar.login = admin -D sonar.password = admin 
 					'''
