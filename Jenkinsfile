@@ -79,10 +79,10 @@ pipeline {
 	stage('SonarQube Analysis') {
 		steps{
 		      script{	
-		            def scannerHome = tool 'Sonarqube';
+		            def scannerHome = tool name: 'Sonarqube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
 			    withSonarQubeEnv ('Sonar_server') {
 				  sh ''' 
-				    $(scannerHome)/bin/sonar-runner -D sonar.login = admin -D sonar.password = admin 
+				     ${scannerHome}/bin/sonar-runner -D sonar.login = admin -D sonar.password = admin 
 					'''
 					}
 				}
