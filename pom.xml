@@ -20,14 +20,14 @@
 
 	<build>
 		<plugins>
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.mule.tools.maven</groupId>
 				<artifactId>mule-maven-plugin</artifactId>
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
 				</configuration>
-			</plugin>
+			</plugin> -->
 			
 			<plugin>
 			<groupId>org.sonarsource.scanner.maven</groupId>
@@ -90,12 +90,12 @@
 	</build>
 
 	<dependencies>
-	<!-- https://mvnrepository.com/artifact/org.sonarsource.scanner.maven/sonar-maven-plugin -->
+	<!-- https://mvnrepository.com/artifact/org.sonarsource.scanner.maven/sonar-maven-plugin 
 	<dependency>
 	    <groupId>org.sonarsource.scanner.maven</groupId>
 	    <artifactId>sonar-maven-plugin</artifactId>
 	    <version>3.6.0.1398</version>
-	</dependency>
+	</dependency> -->
 	
         <dependency>
             <groupId>org.mule.connectors</groupId>
