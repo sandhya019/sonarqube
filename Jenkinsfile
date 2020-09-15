@@ -82,7 +82,8 @@ pipeline {
 	          def Maven3 = tool name: 'Maven3', type: 'maven'
 		  withSonarQubeEnv("Sonar_server") {
 	          // sh 'mvn clean package sonar:sonar'
-		   sh "${Maven3}/bin/mvn sonar:sonar" 
+		  // sh "${Maven3}/bin/mvn sonar:sonar" 
+			  mvn clean sonar:sonar -Dsonar.url="http://3.137.158.167:9000" -Dsonar.login=admin -Dsonar.password=admin  
 		    }
 		   }	   
 		}	
