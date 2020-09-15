@@ -82,7 +82,6 @@ pipeline {
 	         def mavenPom = readMavenPom file:'pom.xml'
 		  withSonarQubeEnv("Sonar_server") {
 		  mvn sonar:sonar \
-		  -Dsonar.projectKey={groupId}:{artifactId} \
 		  -Dsonar.host.url=http://3.137.158.167:9000 \
 		  -Dsonar.login=568b79c704124d4f2288efca690cc07bfc5b962d
 		      }
