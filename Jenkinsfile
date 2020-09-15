@@ -104,7 +104,7 @@ pipeline {
 			//sh '''
 			//mvn clean sonar:sonar -Dsonar.url="http://3.137.158.167:9000" -Dsonar.login=admin -Dsonar.password=admin  
 			//'''
-		  }
+		 // }
 		  	   
 			
   	 
